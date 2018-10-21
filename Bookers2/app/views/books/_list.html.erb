@@ -1,0 +1,47 @@
+
+<!-- SIDE BAR-->
+		<div class="side-bar col-md-3">
+			<!-- User Info -->
+			<div class="user_info">
+				<h2>User info</h2>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg" ,class:"img-responsive"%>
+						</tr>
+						<tr>
+							<th >name</th>
+							<th ><%= user.name %> </th>
+						</tr>
+						<tr>
+							<th>introduction</th>
+							<th><%= user.introduction %> </th>
+						</tr>
+					</thead>
+				</table>
+				<p class="row">
+					<% if user.id==current_user.id %>
+					    <%= link_to "",edit_user_path(user.id) ,class: "btn btn-block btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+					<% else %>
+					    <%= link_to "",new_book_path ,class: "btn btn-block btn-default glyphicon glyphicon-wrench home" %>
+					<% end %>
+				</p>
+			</div>
+			<!-- New Book -->
+			<div class="new_book">
+				<h2>New book</h2>
+				<%= form_for(book) do |f| %>
+				<p class="row">
+					<%= f.label :title, "Title"%><br>
+					<%= f.text_field :title, class: "col-md-12 book_title" %>
+				</p>
+				<p class="row">
+					<%= f.label :opinion, "Opinion"%><br>
+					<%= f.text_area :opinion, rows:"2", class: "col-md-12 book_body" %>
+				</p>
+				<p class="row">
+					<%= f.submit "Create Book", class: "btn btn-block btn-primary"%>
+				</p>
+				<% end %>
+			</div>
+		</div>

@@ -1,0 +1,46 @@
+
+<div class="container">
+	<div class="row">
+
+		<!-- SIDE BAR-->
+		<%= render'books/list',book:@book ,user:@user  %>
+
+		<!-- MAIN LIST-->
+		<div class="main-list col-md-9">
+			<!-- Books-->
+			<div class="books">
+				<h2>Books</h2>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						  <th class="col-md-3"></th>
+						  <th class="col-md-5">Title</th>
+						  <th class="col-md-3">Opinion</th>
+						  <th class="col-md-1"></th>
+					  </tr>
+					</thead>
+					<% @books.each do |books| %>
+					  <tbody>
+						  <tr>
+							  <td> <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg" ,class:"img-responsive"%></td>
+							  <td> <%= link_to books.title,book_path(books.id), class: "book_#{books.id}" %> </td>
+							  <td> <%= books.opinion %> </td>
+						  </tr>
+					</tbody>
+					<% end%>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<footer>
+	<div class="container">
+		<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6"></div>
+		<div class="col-md-3"><p>CopyRight Infratop.inc</p></div>
+	</div>
+</footer>

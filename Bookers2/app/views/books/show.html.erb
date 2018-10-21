@@ -1,0 +1,67 @@
+
+<!-- Book_detail -->
+
+<div class="container">
+	<div class="row">
+		<!-- サクセスメッセージ-->
+		<p id="notice"><%= notice %></p>
+		<!-- エラーメッセージ -->
+		<% if @book.errors.any? %>
+			<div id="error_explanation">
+				<h3><%= @book.errors.count %> error prohibited this obj from being saved:</h3>
+				<ul>
+					<% @book.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<!-- SIDE BAR-->
+		<%= render'books/list',book:@book ,user:@user %>
+
+		<!-- MAIN LIST-->
+		<div class="main-list col-md-9">
+			<!-- Book Detail-->
+			<div class="book-detail">
+				<h2>Book detail</h2>
+				<table class="table table-striped">
+					<tbody>
+						<% if @user.id==current_user.id %>
+						<tr>
+							<td class="col-md-3"><%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg" ,class:"img-responsive"%>
+							  	  <%= link_to @user.name,user_path(@user.id),class: "user_#{@user.id}" %> </td>
+							<td class="col-md-3"><%= @book_id.title %></td>
+							<td class="col-md-4"><%= @book_id.opinion %></td>
+							<td class="col-md-1">
+								<%= link_to "Edit",edit_book_path,class: "btn btn-success btn-sm edit_book_#{@book_id.id}" %>
+							</td>
+							<td class="col-md-1">
+								<%= link_to "Destroy",book_path,method: :delete,data: {confirm: "本当に消しますか？"},class: "btn btn-danger btn-sm destroy_book_#{@book_id.id}" %>
+							</td>
+						</tr>
+						<% else %>
+						<tr>
+							<td class="col-md-3"><%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg" ,class: "img-responsive" %><%= link_to @user.name,user_path(@user.id),class: "user_#{@user.id}" %> </td>
+							<td class="col-md-4"><%= @book_id.title %></td>
+							<td class="col-md-5"><%= @book_id.opinion %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<footer>
+	<div class="container">
+		<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6"></div>
+		<div class="col-md-3"><p>CopyRight Infratop.inc</p></div>
+	</div>
+</footer>
+

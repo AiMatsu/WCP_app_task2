@@ -1,0 +1,62 @@
+<!-- BOOK INDEX -->
+
+<div class="container">
+	<div class="row">
+
+		<!-- サクセスメッセージ -->
+		<p id="notice"><%= notice %></p>
+
+		<!-- エラーメッセージ -->
+		<% if @book.errors.any? %>
+			<div id="error_explanation">
+				<h3><%= @book.errors.count %> error prohibited this obj from being saved:</h3>
+				<ul>
+					<% @book.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<!-- SIDE BAR-->
+		<%= render'books/list',book:@book ,user:@user %>
+
+		<!-- MAIN LIST-->
+		<div class="main-list col-md-9">
+			<!-- Books-->
+			<div class="books">
+				<h2>Books</h2>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						<th class="col-md-3"></th>
+						<th class="col-md-5">Title</th>
+						<th class="col-md-3">Opinion</th>
+						<th class="col-md-1"></th>
+					</tr>
+					</thead>
+					<% @books.each do |book| %>
+					<tbody>
+						<tr>
+							<td> <%= attachment_image_tag book.user, :profile_image, fallback: "no_image.jpg" ,class:"img-responsive"%></td>
+							<td> <%= link_to book.title,book_path(book.id), class: "book_#{book.id}" %> </td>
+							<td> <%= book.opinion %> </td>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<footer>
+	<div class="container">
+		<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6"></div>
+		<div class="col-md-3"><p>CopyRight Infratop.inc</p></div>
+	</div>
+</footer>
