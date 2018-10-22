@@ -20,11 +20,7 @@
 					</thead>
 				</table>
 				<p class="row">
-					<% if user.id==current_user.id %>
-					    <%= link_to "",edit_user_path(user.id) ,class: "btn btn-block btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
-					<% else %>
-					    <%= link_to "",new_book_path ,class: "btn btn-block btn-default glyphicon glyphicon-wrench home" %>
-					<% end %>
+					<%= link_to "",edit_user_path(user.id) ,class: "btn btn-block btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
 				</p>
 			</div>
 			<!-- New Book -->

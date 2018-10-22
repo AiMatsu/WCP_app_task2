@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
 
     before_action :authenticate_user!
+    before_action :correct_user,   only: [:edit, :update,:destroy]
+
 	def new
 		@book = Book.new
 		@user = current_user
@@ -52,6 +54,14 @@ class BooksController < ApplicationController
 			redirect_to books_path, notice: "Book was successfully destroyed."
 	    end
 	end
+
+
+	def correct_user
+	  @book_id = Book.find(params[:id])
+      @user = @book_id.user
+      redirect_to books_path unless @user == current_user
+    end
+
 
 	private
 	def book_params

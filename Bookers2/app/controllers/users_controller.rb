@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
 
 	before_action :authenticate_user!
+	before_action :correct_user,   only: [:edit, :update]
+
 
 	def show
 		@user = User.find (params[:id])
@@ -27,6 +29,11 @@ class UsersController < ApplicationController
 		@user = current_user
 		@book = Book.new
 	end
+
+	def correct_user
+      @user = User.find(params[:id])
+      redirect_to new_book_path unless @user == current_user
+    end
 
 	private
 	def user_params
